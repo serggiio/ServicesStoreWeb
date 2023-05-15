@@ -1,0 +1,79 @@
+<button class="btn btn-outline-dark mb-3" (click)="open(content)">Add</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Book form</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form #createForm="ngForm" class="form-card">
+      <div class="row pb-4">
+        <div class="col-sm">
+          <label for="bookTitle" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="bookTitle"
+            name="bookTitle"
+            aria-describedby="bookTitleFeedback"
+            [(ngModel)]="createBookModel.title"
+            #title="ngModel"
+            [minlength]="3"
+            [ngClass]="title.touched && !title.valid ? 'is-invalid' : ''"
+            required
+          />
+          <div
+            id="bookTitleFeedback"
+            class="invalid-feedback"
+            *ngIf="title.touched && !title.valid"
+          >
+            Invalid name
+          </div>
+        </div>
+      </div>
+
+      <div class="row pb-4">
+        <div class="col-sm">
+          <label for="bookPublishDate" class="form-label">Publish date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="bookPublishDate"
+            name="bookPublishDate"
+            aria-describedby="bookPublishDateFeedback"
+            [(ngModel)]="createBookModel.publishDate"
+            #publishDate="ngModel"
+            [ngClass]="
+              publishDate.touched && !publishDate.valid ? 'is-invalid' : ''
+            "
+            required
+          />
+          <div
+            id="bookPublishDateFeedback"
+            class="invalid-feedback"
+            *ngIf="publishDate.touched && !publishDate.valid"
+          >
+            Invalid Publish date
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <div class="d-flex justify-content-between">
+        <button
+          type="submit"
+          class="btn btn-dark"
+          [disabled]="!createForm?.valid"
+          (click)="createBook()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

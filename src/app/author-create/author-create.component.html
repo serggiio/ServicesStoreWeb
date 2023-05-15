@@ -1,0 +1,106 @@
+<button class="btn btn-outline-dark mb-3" (click)="open(content)">
+  Create Author
+</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Author form</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form #createForm="ngForm" class="form-card">
+      <div class="row pb-4">
+        <div class="col-sm">
+          <label for="authorName" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="authorName"
+            name="authorName"
+            aria-describedby="authorNameFeedback"
+            [(ngModel)]="createAuthorModel.name"
+            #name="ngModel"
+            [minlength]="3"
+            [ngClass]="name.touched && !name.valid ? 'is-invalid' : ''"
+            required
+          />
+          <div
+            id="authorNameFeedback"
+            class="invalid-feedback"
+            *ngIf="name.touched && !name.valid"
+          >
+            Invalid name
+          </div>
+        </div>
+      </div>
+
+      <div class="row pb-4">
+        <div class="col-sm">
+          <label for="authorLastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="authorLastName"
+            name="authorLastName"
+            aria-describedby="authorLastNameFeedback"
+            [(ngModel)]="createAuthorModel.lastName"
+            #lastName="ngModel"
+            [minlength]="3"
+            [ngClass]="lastName.touched && !lastName.valid ? 'is-invalid' : ''"
+            required
+          />
+          <div
+            id="authorLastNameFeedback"
+            class="invalid-feedback"
+            *ngIf="lastName.touched && !lastName.valid"
+          >
+            Invalid last name
+          </div>
+        </div>
+      </div>
+
+      <div class="row pb-4">
+        <div class="col-sm">
+          <label for="authorBirthDate" class="form-label">Birth date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="birthDate"
+            name="birthDate"
+            aria-describedby="birthDateFeedback"
+            [(ngModel)]="createAuthorModel.birthDate"
+            #birthDate="ngModel"
+            [ngClass]="
+              birthDate.touched && !birthDate.valid ? 'is-invalid' : ''
+            "
+            required
+          />
+          <div
+            id="authorBirthDateFeedback"
+            class="invalid-feedback"
+            *ngIf="birthDate.touched && !birthDate.valid"
+          >
+            Invalid birth date
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <div class="d-flex justify-content-between">
+        <button
+          type="submit"
+          class="btn btn-dark"
+          [disabled]="!createForm?.valid"
+          (click)="createAuthor()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
