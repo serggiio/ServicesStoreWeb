@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  URL: 'https://localhost:',
-  PATH_AUTHORS: '7142/api/Author',
-  PATH_BOOKS: '7238/api/Book',
+  URL: 'http://localhost:',
+  PATH_AUTHORS: '6104/api/Author',
+  PATH_BOOKS: '6105/api/Book',
 };
